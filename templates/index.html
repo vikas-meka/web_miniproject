@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in user</title>
+</head>
+<body>
+    <p>
+    This is my home page</p>
+    <a href="/student">STUDENT</a>
+    <a href="/administrator">ADMIN</a>
+    <a href="/login">FACULTY</a>
+
+    {% comment %} <a href="/logout">Logout</a> {% endcomment %}
+    {% comment %} <a href="/marking">{{course}}</a> {% endcomment %}
+    {% comment %} <a href="{% url '/marking' course %}">{{course}}</a> {% endcomment %}
+    {% comment %} <a href="{% url 'marking' %}?var=abc">{{course}}</a> {% endcomment %}
+
+</body>
+</html>
