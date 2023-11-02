@@ -20,21 +20,85 @@
 
 {% endblock%}
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in user</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body > p {
+            font-size: 2vw;
+        }
+
+        /* Style the container that holds the alert messages */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Style the alert messages */
+        .alert {
+            background-color: #f8d7da; /* Red background color (adjust as needed) */
+            color: #721c24; /* Text color (adjust as needed) */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        /* Style the close button */
+        .close {
+            position: relative;
+            top: -2px;
+            right: -2px;
+            padding: 10px;
+            background-color: #f8d7da; /* Red background color (adjust as needed) */
+            border: 1px solid #721c24; /* Border color (adjust as needed) */
+            border-radius: 4px;
+        }
+
+        /* Change the close button text color when hovered */
+        .close:hover {
+            color: #721c24; /* Text color on hover (adjust as needed) */
+        }
+    </style>
+</head>
+
+
 {%block body%}
+
+{% if messages %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %} 
+
 <div class="hitems text-center">
     <form class="form-signin" style="width:25%;" method="post" action="/add_course">
         {% csrf_token %}
 
         <label for="inputEmail" class="sr-only mt-2"><strong><h6>COURSE</strong></h6></label>
-        <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
+        <input type="text" id="inputEmail1" name="course" class="form-control" placeholder="COURSE CODE" required
             autofocus>
 
         <label for="inputEmail" class="sr-only mt-3"><strong><h6>PASSWORD</strong></h5></label>
-        <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
+        <input type="text" id="inputEmail1" name="password" class="form-control" placeholder="PASSWORD" required
             autofocus>
 
         <label for="inputEmail" class="sr-only mt-3"><strong><h6>CREDITS</strong></h6></label>
-        <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
+        <input type="number" id="inputEmail1" name="credits" class="form-control" placeholder="CREDITS" required
             autofocus>
 
         <label for="year" class="sr-only mt-4"><strong><h6>YEAR</strong></h6></label>
@@ -64,7 +128,7 @@
         {% csrf_token %}
 
         <label for="inputEmail" class="sr-only mt-5"><strong><h5>COURSE</strong></h5></label>
-        <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
+        <input type="text" id="inputEmail1" name="course" class="form-control" placeholder="COURSE" required
             autofocus>
 
         <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;" type="submit">DELETE</button>

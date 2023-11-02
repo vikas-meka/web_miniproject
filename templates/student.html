@@ -1,14 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Display Variable</title>
-</head>
-<body>
-    <p>NAME: {{ my_variable }}</p>
-    <p>ROLL NUMBER: {{ my_variable }}</p>
-    <p>SEMESTER: {{ my_variable }}</p>
-    <p>BRANCH: {{ my_variable }}</p>
-    <p>CGPA: {{ my_variable }}</p>
+{% extends "base.html" %}
+{%load static%}
+
+{%block Heading%} 2023-24 ODD SEMESTER RESULTS{%endblock%}
+
+{%block style%}
+.hcontent
+{
+    display:grid;
+    grid-template-rows:1fr 4fr;
+}
+
+.hdetails
+{
+    display:grid;
+    grid-template-rows:1fr 1fr;
+    background-color:white;
+    width:75%;
+    margin-left:10%;
     
-</body>
-</html>
+}
+
+.hname
+{
+    
+}
+
+.htable
+{
+    
+}
+{% endblock %}
+
+{% block body%}
+
+<div class="hcontent">
+    <div class="hdetails">
+        <p class="hname">NAME: {{ name }}</p>
+        <p class="hroll">ROLL NUMBER: {{ rollno }}</p>
+        <p class="hcgpa">CGPA: {{ cgpa }}</p>
+        <p class="hbranch">BRANCH: {{ branch }}</p>
+        <p class="hyear">year: {{ year }}</p>
+    </div>
+
+    <div class="htable">
+        {% for mark in marks %}
+            {% if mark.roll_no == rollno %}        
+                {% for course in courses %}                                                   
+                        {% if mark.course == course.course1 %}
+                            <p>{{ course.name }}: {{ mark.score }}:{{course.credits}}</p>
+                        {% endif %}              
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+{% endblock%}

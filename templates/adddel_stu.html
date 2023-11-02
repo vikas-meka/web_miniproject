@@ -20,7 +20,70 @@
 
 {% endblock%}
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in user</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body > p {
+            font-size: 2vw;
+        }
+
+        /* Style the container that holds the alert messages */
+        .container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Style the alert messages */
+        .alert {
+            background-color: #f8d7da; /* Red background color (adjust as needed) */
+            color: #721c24; /* Text color (adjust as needed) */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        /* Style the close button */
+        .close {
+            position: relative;
+            top: -2px;
+            right: -2px;
+            padding: 10px;
+            background-color: #f8d7da; /* Red background color (adjust as needed) */
+            border: 1px solid #721c24; /* Border color (adjust as needed) */
+            border-radius: 4px;
+        }
+
+        /* Change the close button text color when hovered */
+        .close:hover {
+            color: #721c24; /* Text color on hover (adjust as needed) */
+        }
+    </style>
+</head>
+
 {%block body%}
+
+{% if messages %}
+<div class="container">
+    {% for message in messages %}
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
 <div class="hitems text-center">
     <form class="form-signin" style="width:25%;" method="post" action="/add_student">
         {% csrf_token %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{%load static%}
+
+{%block Heading%} STUDENT LOGIN{%endblock%}
+
+{%block style %} 
+
+.hitems
+{
+    display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            justify-content:center;
+            padding-top: 40px;
+            padding-bottom: 40px;
+            height:100%;
+            color:white;
+}
+
+{% endblock%}
+
+{%block body%}
+<div class="hitems text-center">
+    <form class="form-signin" style="width:25%;" method="post" action="/student">
+        {% csrf_token %}
+        <label for="inputEmail" class="sr-only mt-5"><strong><h5>Username</h5></strong></label>
+        <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required
+            autofocus>
+        <label for="inputPassword" class="sr-only mt-3" ><strong><h5>Password</h5></strong></label>
+        <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+        <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;"type="submit">GET RESULTS</button>
+    </form>
+</div>
+{%endblock%}
