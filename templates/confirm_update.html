@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Update Confirmation</title>
+</head>
+<body>
+    <h1>Marks already exist for Roll No: {{ roll_no }} and Course: {{ sub }}</h1>
+    <p>Do you want to update the marks?</p>
+    <button onclick="updateMarks()">Yes</button>
+    <button onclick="cancel()">No</button>
+
+    <script>
+        function updateMarks() {
+            // Redirect to the marking page to update marks
+            window.location.href = '/marking';
+        }
+
+        function cancel() {
+            // Do nothing, stay on the current page
+            window.location.href = '/marking';
+        }
+    </script>
+</body>
+</html>

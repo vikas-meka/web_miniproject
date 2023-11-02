@@ -1,21 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged in user</title>
-</head>
-<body>
-    <p>
-    This is my home page</p>
-    <a href="/student">STUDENT</a>
-    <a href="/administrator">ADMIN</a>
-    <a href="/login">FACULTY</a>
+{% extends "base.html" %}
+{%load static%}
 
-    {% comment %} <a href="/logout">Logout</a> {% endcomment %}
-    {% comment %} <a href="/marking">{{course}}</a> {% endcomment %}
-    {% comment %} <a href="{% url '/marking' course %}">{{course}}</a> {% endcomment %}
-    {% comment %} <a href="{% url 'marking' %}?var=abc">{{course}}</a> {% endcomment %}
+{%block style%}
+        .item 
+        {
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background-color:#051D40;
+            margin-top:5%;
+            margin-bottom:5%;
+            margin-left:2%;
+            margin-right:2%;
+            width:15vw;
+            height:20vw;
+        }
 
-</body>
-</html>
+        button
+        {
+            background-color: #145DA0;
+        }
+
+        .hitems
+        {
+            display:flex;
+            width:100%;
+            justify-content:center;
+        }
+{%endblock%}
+
+{%block Heading%} STUDENT RESULTS MANAGEMENT{%endblock%}
+
+{%block body%}
+<div class="hitems">
+    <div class="item">
+        <img src="{% static 'student1.png' %}">
+        <a href="/student">
+            <button type=button class="btn btn-primary">
+                STUDENT
+            </button>
+        </a>
+    </div>
+    <div class="item">
+        <img src="{% static 'Faculty.png' %}">
+        <a href="/login">
+            <button type=button class="btn btn-primary">
+                Faculty
+            </button>
+        </a>
+    </div>
+    <div class="item">
+        <img src="{% static 'admin.png' %}">
+        <a href="/admin_login">
+            <button type=button class="btn btn-primary">
+                ADMIN
+            </button>
+        </a>
+    </div>
+</div>
+{%endblock%}

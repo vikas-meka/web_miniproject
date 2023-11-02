@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {%load static%}
 
-{%block Heading%} FACULTY LOGIN{%endblock%}
+{%block Heading%} ADMIN LOGIN{%endblock%}
 
 {%block style %} 
 
@@ -22,7 +22,7 @@
 
 {%block body%}
 <div class="hitems text-center">
-    <form class="form-signin" style="width:25%;" method="post" action="/login">
+    <form class="form-signin" style="width:25%;" method="post" action="/admin_login">
         {% csrf_token %}
         <label for="inputEmail" class="sr-only mt-5"><strong><h5>Username</h5></strong></label>
         <input type="text" id="inputEmail" name="username" class="form-control" placeholder="Username" required
