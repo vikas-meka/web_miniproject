@@ -1,62 +1,114 @@
-{% extends "base.html" %}
-{%load static%}
+{% extends "base2.html" %}
+{% load static %}
 
-{%block style%}
-        .item 
-        {
-            display:flex;
-            flex-direction:column;
-            justify-content:center;
-            align-items:center;
-            background-color:#051D40;
-            margin-top:5%;
-            margin-bottom:5%;
-            margin-left:2%;
-            margin-right:2%;
-            width:15vw;
-            height:20vw;
-        }
+{% block style %}
+/* Updated styles for a light black background */
 
-        button
-        {
-            background-color: #145DA0;
-        }
+/* Navigation bar styles */
+.navbar {
+    background-color: #09072f; /* Light black background */
+    padding: 25px 0;
+    text-align: right; /* Align links to the right */
+    font-family: 'Arial', sans-serif; /* Change font family */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    margin-bottom:-20px;
+}
 
-        .hitems
-        {
-            display:flex;
-            width:100%;
-            justify-content:center;
-        }
-{%endblock%}
+.navbar a {
+    color: #ffffff; /* White text */
+    text-decoration: none;
+    margin: 0 20px;
+    font-size: 16px; /* Font size */
+    font-weight: bold;
+    transition: color 0.3s ease; /* Add smooth transition */
+}
 
-{%block Heading%} STUDENT RESULTS MANAGEMENT{%endblock%}
+.navbar a:hover {
+    color: #FF5733; /* Orange on hover */
+}
 
-{%block body%}
-<div class="hitems">
-    <div class="item">
-        <img src="{% static 'student1.png' %}">
-        <a href="/student">
-            <button type=button class="btn btn-primary">
-                STUDENT
-            </button>
-        </a>
-    </div>
-    <div class="item">
-        <img src="{% static 'Faculty.png' %}">
-        <a href="/login">
-            <button type=button class="btn btn-primary">
-                Faculty
-            </button>
-        </a>
-    </div>
-    <div class="item">
-        <img src="{% static 'admin.png' %}">
-        <a href="/admin_login">
-            <button type=button class="btn btn-primary">
-                ADMIN
-            </button>
-        </a>
-    </div>
+/* Container styles */
+.container {
+    margin-top: 20px; /* Reduced margin */
+    text-align: center;
+    background-color: #ffffff; /* White background */
+}
+
+/* Features section styles */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px; /* Reduced margin */
+}
+
+.feature {
+    padding: 20px;
+    background-color: #ECF0F1; /* Light gray */
+    border-radius: 10px;
+}
+
+.feature h3 {
+    color: #2C3E50; /* Dark blue */
+}
+
+.feature p {
+    color: #34495E; /* Darker blue */
+}
+
+/* Added padding to improve spacing */
+#results-image {
+    margin-top: -20px; /* Reduced margin */
+    margin-left: -115px;
+}
+
+/* Added animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated {
+    animation: fadeInUp 1s ease-out;
+    background-image:url("result_img.jpg");
+}
+
+/* Increased size of result_img */
+#results-image img {
+    width: 108.70746989999999%; 
+    height: auto; 
+    margin: 0;
+    margin-left: -5px;
+    
+   
+}
+
+body{
+
+    background-image: url("{% static 'results_img2.jpg' %}");
+    background-size: cover;
+    height:775px;
+
+
+}
+{% endblock %}
+
+{% block Heading %} STUDENT RESULT MANAGEMENT {% endblock %}
+
+{% block body %}
+
+<div class="navbar">
+    <a href="#" style="margin-right: auto;">Home</a> 
+    <a href="/student">Student</a>
+    <a href="/login">Faculty</a>
+    <a href="/admin_login">Admin</a>
 </div>
-{%endblock%}
+
+{% endblock %}
+

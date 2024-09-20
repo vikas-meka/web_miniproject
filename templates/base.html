@@ -10,7 +10,7 @@
         .home
         {
             display:grid;
-            grid-template-rows:1fr 1fr 1fr 1fr;
+            grid-template-rows:1fr 1fr 1fr 1fr 1fr 1fr;
             height:100vh;
         }
 
@@ -19,8 +19,9 @@
             color:white;
             display:grid;
             grid-template-columns:1fr 1fr 1fr 1fr;
-            background-color:#051D40;
+            background-color:#212529;
             font-size:2vw;
+        
         }
 
         .hintro > b
@@ -32,10 +33,10 @@
 
         .hcontainer
         {
-            grid-row:span 3;
+            grid-row:span 5;
             display:grid;
             grid-template-row:3fr 1fr;
-            background-color:#145DA0;
+            background-color:white;
         }
 
         .stripes
@@ -54,7 +55,7 @@
             display:flex;
             justify-content:space-between;
             align-self:end;
-            background-color:#145DA0;
+            background-color:white;
         }
         .sfstripe
         {
@@ -80,20 +81,15 @@
             </div>
         </div>
         <div class="hcontainer">
-            <div>
+            <div style="background-color:white">
                 {%block body%} {% endblock %}
             </div>
-            <div class="sf" >
+            <!-- <div class="sf" >
                 <img class="sfstripe"style="height:6vh;" src="{% static 'stripes.png' %}">
                 <img style="height:15vh;" src="{% static 'flakes2.png' %}">
-            </div>
+            </div> -->
         </div>
     </div>
-
-    {% comment %} <a href="/logout">Logout</a> {% endcomment %}
-    {% comment %} <a href="/marking">{{course}}</a> {% endcomment %}
-    {% comment %} <a href="{% url '/marking' course %}">{{course}}</a> {% endcomment %}
-    {% comment %} <a href="{% url 'marking' %}?var=abc">{{course}}</a> {% endcomment %}
 
 </body>
 <footer style="background-color:#051D40">

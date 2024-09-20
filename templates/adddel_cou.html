@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-{%load static%}
+{% extends "adm.html" %}
+{% load static %}
 
-{%block Heading%} UPDATE COURSE RECORDS{%endblock%}
-
-{%block style %} 
+{% block style %}
 
 .hitems
 {
@@ -18,24 +16,71 @@
             color:white;
 }
 
-{% endblock%}
+
+
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap : 15px;
+
+}
+
+input{
+    padding:6px;
+    max-height:10px;
+    outline:none;
+    border-radius:10px;
+}
+
+.c1{
+    width:180px;
+    height:25px;
+    border-radius:10px;
+}
+
+#div1{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:250px;
+}
+
+#div2{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:180px;
+}
+
+#div3{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:180px;
+}
+
+.button{
+    background-color:#051D40; 
+    color:white;
+    padding : 6px 10px;
+    margin-left: 110px;
+    margin-top:10px;
+    border-radius:6px;  
+
+}
+
+
+{% endblock %}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged in user</title>
-    <style>
-        body {
-            display: flex;
-            height: 100vh;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        body > p {
-            font-size: 2vw;
-        }
+ <style>
 
         /* Style the container that holds the alert messages */
         .container {
@@ -70,10 +115,9 @@
             color: #721c24; /* Text color on hover (adjust as needed) */
         }
     </style>
-</head>
+</head> 
 
-
-{%block body%}
+{% block content %}
 
 {% if messages %}
 <div class="container">
@@ -85,54 +129,83 @@
 </div>
 {% endif %} 
 
-<div class="hitems text-center">
-    <form class="form-signin" style="width:25%;" method="post" action="/add_course">
+<div class="hitems text-center" >
+    <form class="form-signin" id='div1' method="post" action="/add_courseman">
         {% csrf_token %}
-
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-2"><strong><h6>COURSE</strong></h6></label>
         <input type="text" id="inputEmail1" name="course" class="form-control" placeholder="COURSE CODE" required
             autofocus>
+        </div>    
 
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-3"><strong><h6>PASSWORD</strong></h5></label>
         <input type="text" id="inputEmail1" name="password" class="form-control" placeholder="PASSWORD" required
             autofocus>
-
+        </div>
+        
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-3"><strong><h6>CREDITS</strong></h6></label>
         <input type="number" id="inputEmail1" name="credits" class="form-control" placeholder="CREDITS" required
             autofocus>
+        </div>
 
-        <label for="year" class="sr-only mt-4"><strong><h6>YEAR</strong></h6></label>
-        <select name="year" id="year">
+        <div class="flex">
+        <label for="year" class="sr-only mt-3"><strong><h6>YEAR</strong></h6></label>
+        <select name="year" id="year" class="c1">
             <option value="1">1st YEAR</option>
             <option value="2">2nd YEAR</option>
             <option value="3">3rd YEAR</option>
             <option value="4">4th YEAR</option>
         </select>
-
-        <label for="inputEmail" class="sr-only mt-4"><strong><h6>BRANCH</strong></h6></label>
-        <select name="branch" id="branch">
+        </div>
+        
+        <div class="flex">
+        <label for="inputEmail" class="sr-only mt-3"><strong><h6>BRANCH</strong></h6></label>
+        <select name="branch" id="branch" class="c1">
             <option value="cse">CSE</option>
             <option value="ece">ECE</option>
         </select>
-    </br>
-
+        </div>
+    
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-2"><strong><h6>NAME</strong></h5></label>
         <input type="text" id="inputEmail1" name="name" class="form-control" placeholder="NAME" required
-            autofocus>    
+            autofocus> 
+        </div>
+        
+        <div class="flex">
+            <label for="inputEmail" class="sr-only mt-2"><strong><h6>Teacher</strong></h5></label>
+            <input type="text" id="inputEmail1" name="teacher" class="form-control" placeholder="NAME" required
+                autofocus> 
+        </div>
 
-        <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;" type="submit">ADD</button>
+        <button class="button" style="background-color:#051D40; margin-left:90px; color:white;" type="submit">ADD</button>
 
     </form>
 
-    <form class="form-signin" style="width:25%;" method="post" action="/delete_course">
+    <form id='div2' class="form-signin"  method="post" action="/delete_course">
         {% csrf_token %}
 
         <label for="inputEmail" class="sr-only mt-5"><strong><h5>COURSE</strong></h5></label>
         <input type="text" id="inputEmail1" name="course" class="form-control" placeholder="COURSE" required
             autofocus>
 
-        <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;" type="submit">DELETE</button>
-
+        <button class="button" style="background-color:#051D40; margin-left:50px; margin-top:10px; color:white; type="submit>DELETE</button>
+        {% comment %} <a class="btn btn-lg btn-block mt-4" style="width: 25%; background-color:#051D40; color:white; text-decoration: none; display: inline-block;" href="/administrator">BACK</a> {% endcomment %}
     </form>
+
+
+ <div id='div3' class="hitems text-center">
+    <form class="form-signin"  method="post" action="/add_course" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <label for="fileInput" class="sr-only mt-3"><strong><h5>Upload Excel File</strong></h5></label>
+        <input type="file" id="fileInput" name="excel_file" class="form-control-file" accept=".xlsx, .xls" required>
+
+        <button class="button" style="background-color:#051D40; margin-left:40px; margin-top:10px; color:white;" type="submit">UPLOAD</button>
+    </form>
+ </div>
 </div>
-{%endblock%}
+{% endblock %}
+

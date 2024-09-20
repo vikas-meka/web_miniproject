@@ -1,0 +1,28 @@
+{% extends "adm.html" %}
+{% load static %}
+
+{% block style %}
+
+.main {
+    margin: 20px;
+    padding: 20px;
+    background-color: #212529;
+    color:white;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main">
+
+    Marking {{ entered }}/{{ total }}
+    
+</div>
+
+{% endblock %}
+

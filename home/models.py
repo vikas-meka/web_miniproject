@@ -1,6 +1,6 @@
 from django.db import models
 
-class teacher(models.Model):
+class course(models.Model):
     username = models.CharField(max_length=150,unique=True,blank=True,null=True)
     password = models.CharField(max_length=128,blank=True,null=True)
     course1  = models.CharField(max_length=150,primary_key=True)
@@ -8,13 +8,13 @@ class teacher(models.Model):
     year  = models.CharField(max_length=2,blank=True,null=True)
     branch  = models.CharField(max_length=4,blank=True,null=True)
     name = models.CharField(max_length=150,blank=True,null=True)
-
+    teacher = models.CharField(max_length=150,blank=True,null=True)
     
     def __str__ (self):
         return self.username
-    
+      
 
-class marks(models.Model):
+class mark(models.Model):
     roll_no = models.CharField(max_length=150)
     course = models.CharField(max_length=150)    
     ct1 = models.IntegerField(blank=True,null=True)
@@ -29,7 +29,8 @@ class marks(models.Model):
      template = '{0.roll_no} {0.course}'
      return template.format(self)
     
-class student_details(models.Model):
+    
+class student_detail(models.Model):
     roll_no = models.CharField(max_length=150,unique=True,primary_key=True)
     name = models.CharField(max_length=150,blank=True,null=True)
     year  = models.CharField(max_length=2,blank=True,null=True)
@@ -39,9 +40,19 @@ class student_details(models.Model):
     def __str__ (self):
         return self.roll_no
             
-class course(models.Model):
+class course_key(models.Model):
     key = models.CharField(max_length=255,blank=True,null=True)
     course = models.CharField(max_length=255,blank=True,null=True)
+    name = models.CharField(max_length=255,blank=True,null=True)
+    total_marks = models.CharField(max_length=255,blank=True,null=True)
+    entered_marks = models.CharField(max_length=255,blank=True,null=True)
+
+class admin_key(models.Model):
+    key = models.CharField(max_length=255,blank=True,null=True)
+    name = models.CharField(max_length=255,blank=True,null=True)
+    total_courses = models.CharField(max_length=255,blank=True,null=True)
+    entered_courses = models.CharField(max_length=255,blank=True,null=True)
+   
 
 class grade(models.Model):
     roll_no = models.CharField(max_length=150,blank=True,null=True,unique=True)
@@ -51,9 +62,10 @@ class grade(models.Model):
     def __str__ (self):
         return self.roll_no
 
-class admin_details(models.Model):
+class admin_detail(models.Model):
     username = models.CharField(max_length=150,blank=True,null=True)
-    password = models.CharField(max_length=150,blank=True,null=True)    
+    password = models.CharField(max_length=150,blank=True,null=True)
+    name = models.CharField(max_length=150,blank=True,null=True)    
 
     def __str__ (self):
         return self.username

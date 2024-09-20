@@ -1,9 +1,7 @@
-{% extends "base.html" %}
-{%load static%}
+{% extends "adm.html" %}
+{% load static %}
 
-{%block Heading%} UPDATE STUDENT RECORDS{%endblock%}
-
-{%block style %} 
+{% block style %}
 
 .hitems
 {
@@ -18,25 +16,72 @@
             color:white;
 }
 
-{% endblock%}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap : 15px;
+
+}
+
+input{
+    padding:6px;
+    max-height:10px;
+    outline:none;
+    border-radius:10px;
+}
+
+.c1{
+    width:180px;
+    height:25px;
+    border-radius:10px;
+}
+
+#form1{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:200px;
+
+}
+
+#form2{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:150px;
+}
+
+#form3{
+    border-radius:10px;
+    box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+    background-color: white;
+    padding:20px;
+    color:black;
+    width:175px;
+}
+
+.button{
+    background-color:#051D40; 
+    color:white;
+    padding : 6px 10px;
+    margin-left: 110px;
+    margin-top:10px;
+    border-radius:6px;  
+
+}
+
+{% endblock %}
+
+{%block name%}<h2 id="name">{{name}}</h2>{%endblock%}
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged in user</title>
-    <style>
-        body {
-            display: flex;
-            height: 100vh;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        body > p {
-            font-size: 2vw;
-        }
-
+ <style>
+ 
         /* Style the container that holds the alert messages */
         .container {
             width: 100%;
@@ -69,10 +114,13 @@
         .close:hover {
             color: #721c24; /* Text color on hover (adjust as needed) */
         }
-    </style>
-</head>
 
-{%block body%}
+        
+        
+ </style>
+</head> 
+
+{% block content %}
 
 {% if messages %}
 <div class="container">
@@ -85,49 +133,85 @@
 {% endif %}
 
 <div class="hitems text-center">
-    <form class="form-signin" style="width:25%;" method="post" action="/add_student">
+    <form id='form1' class="form-signin" style="width:20.5%;" method="post" action="/add_studentman">
         {% csrf_token %}
-
+        
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-3"><strong><h5>Roll Number</strong></h5></label>
         <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
             autofocus>
-
+        </div>
+        
+        <div class="flex">
         <label for="year" class="sr-only mt-4"><strong><h5>YEAR</strong></h5></label>
-        <select name="year" id="year">
+        <select name="year" id="year" class="c1">
             <option value="1">1st YEAR</option>
             <option value="2">2nd YEAR</option>
             <option value="3">3rd YEAR</option>
             <option value="4">4th YEAR</option>
         </select>
-
+        </div>
+        
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-4"><strong><h5>BRANCH</strong></h5></label>
-        <select name="branch" id="branch">
+        <select name="branch" id="branch" class="c1">
             <option value="cse">CSE</option>
             <option value="ece">ECE</option>
         </select>
-    </br>
-
+        </div>
+     
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-4"><strong><h5>NAME</strong></h5></label>
         <input type="text" id="inputEmail1" name="name" class="form-control" placeholder="NAME" required
             autofocus>
-
+        </div>
+        
+        <div class="flex">
         <label for="inputEmail" class="sr-only mt-3"><strong><h5>PASSWORD</strong></h5></label>
         <input type="text" id="inputEmail1" name="dob" class="form-control" placeholder="PASSWORD" required
             autofocus>    
-
-        <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;" type="submit">ADD</button>
+        </div>
+        <button class="button" style="background-color:#051D40; color:white; margin-left:100px; margin-top:20px " type="submit">ADD</button>
 
     </form>
 
-    <form class="form-signin" style="width:25%;" method="post" action="/delete_student">
+    <form id='form2' class="form-signin" style="width:13%;" method="post" action="/delete_student">
         {% csrf_token %}
 
         <label for="inputEmail" class="sr-only mt-5"><strong><h5>Roll Number</strong></h5></label>
         <input type="text" id="inputEmail1" name="roll_number" class="form-control" placeholder="ROLL NUMBER" required
             autofocus>
-
-        <button class="btn btn-lg btn-block mt-4" style="background-color:#051D40; color:white;" type="submit">DELETE</button>
-
+            <br/>
+            <button class="button" style="background-color:#051D40; margin-left:60px; margin-top:5px; color:white;" type="submit">DELETE</button>
+            {% comment %} <a class="button" style="width: calc(50% - 5px); padding:13px; background-color:#051D40; color:white; text-decoration: none;" href="/administrator">BACK</a> {% endcomment %}
     </form>
+ <div id='form3' class="hitems text-center">
+    <form class="form-signin" method="post" action="/add_student" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <!-- File input field for uploading Excel file -->
+        <label for="fileInput" class="sr-only mt-3"><strong><h5>Upload Excel File</strong></h5></label>
+        <input type="file" id="fileInput" name="excel_file" class="form-control-file" accept=".xlsx, .xls" required>
+
+        <!-- Submit button -->
+        <button class="button" style="background-color:#051D40; margin-left:35px; margin-top:5px; color:white;" type="submit">UPLOAD</button>
+    </form>
+ </div> 
+
 </div>
-{%endblock%}
+
+{% endblock %}
+
+{% block js %}
+
+    document.addEventListener("DOMContentLoaded", function () {
+        var alertMessages = document.querySelectorAll('.alert');
+
+        alertMessages.forEach(function (message) {
+            setTimeout(function () {
+                message.style.display = 'none';
+            }, 3000); // 3000 milliseconds = 3 seconds
+        });
+    });
+
+{% endblock %}

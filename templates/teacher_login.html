@@ -29,10 +29,15 @@
         }
 
         .form-signin {
-            width: 100%;
-            max-width: 330px;
             padding: 15px;
             margin: auto;
+            border-radius:10px;
+            box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.3);
+            background-color: white;
+            padding:20px;
+            color:black;
+            width:400px;
+            height:300px;    
         }
 
         .form-signin .checkbox {
@@ -78,9 +83,12 @@
                 font-size: 3.5rem;
             }
         }
+
+        .flex{
+            display: flex;
+        }
     </style>
-    <!-- Custom styles for this template -->
-    <link href="signin.css" rel="stylesheet">
+
 </head>
 
 <body class="text-center">
@@ -92,15 +100,13 @@
             autofocus>
         <label for="inputPassword" class="sr-only">Password</label>
         <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+        <div class="flex justify-content-between" style="margin-top: 20px;">
+            <button class="btn btn-lg btn-primary" style="width: 48%;" type="submit">Sign in</button>
+            <a class="btn btn-lg btn-secondary" style="width: 48%;" href="/exit_home">EXIT</a>
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-
     </form>
 </body>
+
 
 </html>
 

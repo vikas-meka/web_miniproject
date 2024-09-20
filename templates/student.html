@@ -1,57 +1,100 @@
 {% extends "base.html" %}
-{%load static%}
+{% load static %}
 
-{%block Heading%} 2023-24 ODD SEMESTER RESULTS{%endblock%}
+{% block Heading %} 2023-24 ODD SEMESTER RESULTS {% endblock %}
 
-{%block style%}
-.hcontent
-{
-    display:grid;
-    grid-template-rows:1fr 4fr;
-}
+{% block style %}
 
-.hdetails
-{
-    display:grid;
-    grid-template-rows:1fr 1fr;
-    background-color:white;
-    width:75%;
-    margin-left:10%;
-    
-}
+<style>
+    .hcontent {
+        display: grid;
+        grid-template-rows: 1fr 4fr;
+        justify-content: center;
+    }
 
-.hname
-{
-    
-}
+    .hdetails {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+        background-color: white;
+        width: 75%;
+        margin-left: 350px;
+        margin-top: 50px;
+        padding: 20px; /* Add padding for spacing inside the white table */
+        border: 1px solid #ccc; /* Add a border around the white table */
+    }
 
-.htable
-{
-    
-}
+    .hname, .hroll, .hcgpa, .hbranch, .hyear {
+        /* Define common styles for text elements */
+        font-size: 16px;
+        margin: 5px 0;
+        font-weight: bold; /* Make text bold */
+        text-transform: uppercase; /* Make text uppercase */
+    }
+
+    .hmark {
+        /* Additional styles for hmark class */
+        font-weight: bold;
+        color: black; /* Set text color to black */
+    }
+
+    .htable {
+        /* Add styles to make it appear as a white table */
+        background-color: white;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+        margin-left: 350px;
+    }
+
+    .htable p {
+        /* Styles for the paragraphs within htable */
+        margin: 5px 0;
+        border-bottom: 1px solid #ccc; /* Add a bottom border to separate entries */
+        padding-bottom: 5px; /* Add spacing between entries */
+    }
+
+    .vertical-line {
+        border-right: 1px solid #ccc; /* Add a vertical line between entries */
+        padding-right: 10px; /* Add spacing between the vertical line and text */
+    }
+
+    /* Set the width for both tables */
+    .hdetails, .htable {
+        width: 50%;
+    }
+
+    /* Fixed-width for course name to align text */
+    .course-name {
+        width: 200px; /* Adjust as needed */
+    }
+</style>
 {% endblock %}
 
-{% block body%}
-
+{% block body %}
 <div class="hcontent">
     <div class="hdetails">
         <p class="hname">NAME: {{ name }}</p>
         <p class="hroll">ROLL NUMBER: {{ rollno }}</p>
         <p class="hcgpa">CGPA: {{ cgpa }}</p>
         <p class="hbranch">BRANCH: {{ branch }}</p>
-        <p class="hyear">year: {{ year }}</p>
+        <p class="hyear">YEAR: {{ year }}</p>
     </div>
 
-    <div class="htable">
+    <div class="htable ">
         {% for mark in marks %}
-            {% if mark.roll_no == rollno %}        
-                {% for course in courses %}                                                   
-                        {% if mark.course == course.course1 %}
-                            <p>{{ course.name }}: {{ mark.score }}:{{course.credits}}</p>
-                        {% endif %}              
+            {% if mark.roll_no == rollno %}
+                {% for course in courses %}
+                    {% if mark.course == course.course1 %}
+                        <p class="hmark">
+                            <span class="course-name">{{ course.name }} : </span>
+                            <span>{{ mark.score }}</span>
+                        </p>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
         {% endfor %}
     </div>
 </div>
-{% endblock%}
+{% endblock %}

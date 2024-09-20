@@ -1,34 +1,174 @@
-{% comment %} <!DOCTYPE html>
+{%load static%}
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged in user</title>
+    <title>BASE</title>
+    <style>
+        #head {
+            background-color: #212529;
+            padding: 20px;
+            border-radius: 0px 0px 10px 10px;
+            color: white;
+            text-align: center;
+            width: 98.41%;
+            {% comment %} margin-right: px; {% endcomment %}
+            margin-left: -8px;
+            margin-top: -10px;
+        }
+
+        .btn {
+            background-color: light-green;
+            padding: 12px 12px;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: #212529;
+        }
+
+        .logoutbutton {
+            text-decoration-line: none;
+            color: red;
+            margin-left: 10px;
+        }
+
+        .header-content {
+            margin-top: -20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-left: 5px;
+        }
+
+        .header-content .btn {
+            {% comment %} margin-right: 1200px; {% endcomment %}
+        }
+
+        .header-content h2{
+            margin-right: 5px;
+        }
+
+        #heading {
+            font-family: 'Poppins', sans-serif;
+            color: #3c3c3c;
+        }
+
+        #name {
+            font-family: 'Poppins', sans-serif;
+            color: #3c3c3c;
+        }
+
+        #content-heading {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #212529;
+            background-color: white;
+        }
+
+        .main-content {
+            background-color: #f2f2f2;
+            min-height: 68vh;
+        }
+
+        #sidebar {
+            width: 200px;
+            height: 100vh;
+            background-color: #212529;
+            position: fixed;
+            top: 214px;
+            left: -200px;
+            transition: left 0.3s ease;
+        }
+
+        #sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        #sidebar ul li {
+            padding: 10px;
+            color: white;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #home-button{
+            margin-right: 12px;
+        }
+
+        #name{
+            margin-right: 100px;
+        }
+        
+        #sidebar-toggle{
+            margin-right: 10px;
+        }
+
+        {% block style %}
+        
+        .main {
+            margin: 20px;
+            padding: 20px;
+            background-color: #212529;
+            color:white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        {% endblock %}
+    </style>
 </head>
 <body>
-    <p>
-    This is my teachers page</p>
+    <div id="head">
+        <p>Students result management system</p>
+    </div>
+    
+    <div class="details">
+        {% block heading %}<h1 id="heading">Faculty Dashboard</h1>{% endblock %}
+        <div class="header-content">
+            {% block name %}<h2 id="name">{{ name }}</h2>{% endblock %}
+            <button class="logoutbutton" id="sidebar-toggle">☰</button>
+            <a href="/" class="logoutbutton">home</a>
+            <a href="/teacher_logout" class="logoutbutton">logout</a>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        {% block content %} 
 
-    <a href="/marking">{{course}}</a>
-    <a href="/logout">Logout</a>
+        <div class="main">
+
+            Marks Entered {{ entered }}/{{ total }}
+            
+        </div>
+        
+        {% endblock %}
+    </div>  
+
+    <div id="sidebar" class="hidden">
+        <ul>
+           <li><a href="/faculty_dashboard" style="text-decoration-line: none; color: white; margin-left: 10px;">Dashboard</a></li>
+           <li><a href="/marking?course={{ course }}" style="text-decoration-line: none; color: white; margin-left: 10px;">Enter marks</a></li>
+           <li><a href="/mark_list" style="text-decoration-line: none; color: white; margin-left: 10px;">View marks</a></li>
+        </ul>
+    </div>
+
+    <script>
+        document.getElementById("sidebar-toggle").addEventListener("click", function() {
+            var sidebar = document.getElementById("sidebar");
+            var mainContent = document.querySelector(".main-content");
+
+            sidebar.classList.toggle("hidden");
+
+            if (sidebar.classList.contains("hidden")) {
+                sidebar.style.left = "-200px";
+                mainContent.style.marginLeft = "0";
+            } else {
+                sidebar.style.left = "0";
+                mainContent.style.marginLeft = "200px";
+            }
+        });
+    </script>
 </body>
 </html>
- {% endcomment %}
-
- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged in user</title>
-</head>
-<body>
-    <p>
-        This is my teachers page
-    </p>
-
-    <a href="/marking?course={{ course }}">Go to Marking</a>
-    <a href="/logout">Logout</a>
-</body>
-</html>
-

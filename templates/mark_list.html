@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  
+<body>
+<style> 
+table {
+    border-collapse: collapse;
+    width: 50%;
+    background-color: white; /* Set the table background to white */
+}
+.class1 {
+    display: flex;
+    justify-content: center;
+}
+th, td {
+    border: 1px solid #000; /* Set the table lines to black */
+    padding: 4px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+</style>
+    
+<div class="class1">
+    <table>
+        <tr>
+            <th>Roll No</th>
+            <th>CT1</th>
+            <th>CT2</th>
+            <th>End</th>
+            <th>Internals</th>
+            <th>Total</th>
+        </tr>
+        {% regroup marks by roll_no as sorted_marks %}
+        {% for group in sorted_marks|dictsort:"grouper" %}
+            {% for mark in group.list %}
+            <tr>
+                <td>{{ mark.roll_no }}</td>
+                <td>{{ mark.ct1 }}</td>
+                <td>{{ mark.ct2 }}</td>
+                <td>{{ mark.end }}</td>
+                <td>{{ mark.internals }}</td>
+                <td>{{ mark.total }}</td>
+            </tr>
+            {% endfor %}
+        {% endfor %}
+    </table>
+</div>
+</body>
+</html>
