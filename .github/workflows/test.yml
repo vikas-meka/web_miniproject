@@ -9,21 +9,7 @@ jobs:
   test:
     runs-on: ubuntu-latest  # Runs the job on the latest version of Ubuntu
 
-    services:
-      postgres:
-        image: postgres:13  # Use PostgreSQL service (or adjust if using a different DB)
-        env:
-          POSTGRES_DB: test_db
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: password
-        ports:
-          - 5432:5432
-
     steps:
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Install dependencies from requirements.txt
 
       - name: Run tests
         run: |
