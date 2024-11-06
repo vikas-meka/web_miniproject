@@ -24,10 +24,10 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3  # Updated to v3
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v3  # Updated to v3
         with:
           python-version: '3.8'
 
@@ -46,7 +46,7 @@ jobs:
 
       - name: Run tests
         run: python manage.py test
-        working-directory: ./web_miniproject
+        working-directory: ./web_miniproject  # Ensure this path is correct
 
       - name: Collect static files (optional)
         run: |
@@ -54,7 +54,7 @@ jobs:
 
       - name: Upload test results (optional)
         if: success()
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated to v3
         with:
           name: test-results
-          path: test-results.xml
+          path: test-results.xml  # Ensure this is the correct path for your test results
