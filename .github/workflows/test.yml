@@ -45,8 +45,8 @@ jobs:
           python manage.py migrate
 
       - name: Run tests
-        run: |
-          python manage.py test
+        run: python manage.py test
+        working-directory: ./web_miniproject
 
       - name: Collect static files (optional)
         run: |
