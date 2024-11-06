@@ -65,7 +65,7 @@ def loginUser(request):
     
     return render(request, 'login.html', {'name': name})
 
-def faculty_dashbaord(request):
+def faculty_dashboard(request):
 
     temp=course_key.objects.all()
     for j in temp:
@@ -84,7 +84,7 @@ def faculty_dashbaord(request):
     return render(request,'faculty_dashboard.html', context)
 
 
-def admin_dashbaord(request):
+def admin_dashboard(request):
           
     temp=admin_key.objects.all()
     for j in temp:
@@ -431,21 +431,25 @@ def calculate(request):
 
 def add_delete_student(request):
 
-    temp=admin_key.objects.all()
+    # Default values if no admin key is found
+    name, tot, com = "Default Name", 0, 0 
+
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+            break  # Stop after finding the first match
+
     context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
+       'name': name,
+       'total': tot,
+       'entered': com
      }
 
-
-    return render(request, 'adddel_stu.html',context)             
+    return render(request, 'adddel_stu.html', context)
+           
                 
 def add_studentman(request):
 
@@ -502,20 +506,23 @@ def add_studentman(request):
     return render(request, 'adddel_stu.html',context)
 
 def add_student(request):
+    # Default values for 'name', 'tot', and 'com'
+    name, tot, com = "Default Name", 0, 0
 
-    temp=admin_key.objects.all()
+    # Try to fetch the 'admin_key' object and update the variables
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
-    context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
-     }
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+            break  # Stop after finding the first match
 
+    context = {
+        'name': name,
+        'total': tot,
+        'entered': com
+    }
 
     if request.method == "POST":
         if 'excel_file' in request.FILES:
@@ -535,7 +542,7 @@ def add_student(request):
                     key = 1
                     for m in t6:
                         if m.roll_no == rollno:
-                            key = 0 
+                            key = 0  # Student already exists
 
                     if key == 1: 
                         for i in t1:
@@ -553,50 +560,55 @@ def add_student(request):
                         student_obj.save()
                     
                     else:
-                        messages.error(request, "Student with roll number {} already exists".format(rollno))
+                        messages.error(request, f"Student with roll number {rollno} already exists")
 
-                messages.error(request, "Students added successfully")
-                return redirect('/add_student') 
+                messages.success(request, "Students added successfully")
+                return redirect('/add_student')
 
             else:
                 messages.error(request, 'Please upload a valid Excel file.')
         else:
             messages.error(request, 'No file uploaded.')
 
-    return render(request, 'adddel_stu.html',context)
+    return render(request, 'adddel_stu.html', context)
+
 
 
 
 def delete_student(request):
-
-    temp=admin_key.objects.all()
+    # Initialize default values for name, tot, and com
+    name = "Admin"
+    tot = 0
+    com = 0
+    
+    # Fetch admin data from admin_key model
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+
     context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
-     }
+        'name': name,
+        'total': tot,
+        'entered': com
+    }
 
-
-
+    # Handling student deletion logic
     key = 0
     if request.method == "POST":
         rollno = request.POST.get('roll_number')
-        t1 = course.objects.all()
         t2 = mark.objects.all()
         t3 = grade.objects.all()
         t4 = student_detail.objects.all()
         t7 = student_password.objects.all()
 
+        # Delete marks, grade, student details, and password
         for i in t2:
             if rollno == i.roll_no:
                 i.delete()
-                key = 1  
+                key = 1
 
         for j in t3:
             if rollno == j.roll_no:
@@ -617,24 +629,28 @@ def delete_student(request):
 
         return redirect('/add_delete_student')
 
-    return render(request, 'adddel_stu.html',context)
+    return render(request, 'adddel_stu.html', context)
+
 
     
 def add_delete_course(request):
+    name, tot, com = "Default Name", 0, 0  # Default values
 
-    temp=admin_key.objects.all()
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+            break  # Stop after finding the first match
+
     context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
-     }
-    return render(request, 'adddel_cou.html',context) 
+       'name': name,
+       'total': tot,
+       'entered': com
+    }
+    return render(request, 'adddel_cou.html', context)
+
 
 
 def add_courseman(request):
@@ -690,21 +706,21 @@ def add_courseman(request):
     return render(request, 'adddel_cou.html',context)
 
 def add_course(request):
+    name, tot, com = "Default Name", 0, 0  # Default values
 
-    temp=admin_key.objects.all()
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+            break  # Stop after finding the first match
+
     context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
-     }
-
-
+       'name': name,
+       'total': tot,
+       'entered': com
+    }
 
     if request.method == "POST":
         if 'excel_file' in request.FILES:
@@ -718,27 +734,27 @@ def add_course(request):
                     credits = row['credits']
                     year = row['year']
                     branch = row['branch']
-                    teacher = row['teacher'] 
+                    teacher = row['teacher']
 
                     t1 = course.objects.all()
                     t2 = mark.objects.all() 
                     t5 = student_detail.objects.all()
-            
+
                     key = 1
                     for m in t1:
                         if m.course1 == course_name:
                             key = 0
                             break 
-            
+
                     if key == 1:
                         new_object = course(username=course_name, password=course_name, course1=course_name, credits=credits, year=year, branch=branch, name=name, teacher=teacher)
                         new_object.save()
-               
+
                         for j in t5:
                             if j.year == str(year) and j.branch == branch:
                                 marks_obj = mark(roll_no=j.roll_no, course=course_name)
                                 marks_obj.save()
-                       
+
                     else:
                         messages.error(request, "Course {} already exists".format(course_name))
 
@@ -749,25 +765,27 @@ def add_course(request):
         else:
             messages.error(request, 'No file uploaded.')
 
-    return render(request, 'adddel_cou.html',context)
+    return render(request, 'adddel_cou.html', context)
+
 
 
 
 def delete_course(request):
+    name, tot, com = "Default Name", 0, 0  # Default values
 
-    temp=admin_key.objects.all()
+    temp = admin_key.objects.all()
     for j in temp:
-           if(j.key=="admin"):
-            name=j.name
-            tot=j.total_courses
-            com=j.entered_courses                                
-            
-    context = { 
-       'name' : name,
-       'total' : tot,
-       'entered' : com
-     }
+        if j.key == "admin":
+            name = j.name
+            tot = j.total_courses
+            com = j.entered_courses
+            break  # Stop after finding the first match
 
+    context = { 
+       'name': name,
+       'total': tot,
+       'entered': com
+    }
 
     key = 0
     if request.method == "POST":
@@ -792,7 +810,8 @@ def delete_course(request):
 
         return redirect('/add_delete_course')
     
-    return render(request, 'adddel_cou.html',context)
+    return render(request, 'adddel_cou.html', context)
+
 
 
 def change_pwd(request):
