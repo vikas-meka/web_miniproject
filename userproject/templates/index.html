@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged in user</title>
+    <style>
+        .home
+        {
+            display:grid;
+            grid-template-rows:1fr 1fr 1fr;
+        }
+
+        .
+    </style>
+</head>
+<body>
+    <div class="home">
+        <div>
+            This is my home page
+        </div>
+        <div>
+            <a href="/student">STUDENT</a>
+        </div>
+        <div>
+            <a href="/administrator">ADMIN</a>
+        </div>
+        <div>
+            <a href="/login">FACULTY</a>
+        </div>
+    </div>
+
+    {% comment %} <a href="/logout">Logout</a> {% endcomment %}
+    {% comment %} <a href="/marking">{{course}}</a> {% endcomment %}
+    {% comment %} <a href="{% url '/marking' course %}">{{course}}</a> {% endcomment %}
+    {% comment %} <a href="{% url 'marking' %}?var=abc">{{course}}</a> {% endcomment %}
+
+</body>
+</html>
